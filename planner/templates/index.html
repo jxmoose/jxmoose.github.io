@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Main Page
+{% endblock %}
+
+{% block main %}
+    {% if tables is none %}
+        <h1> No Tables </h1>
+        <a href="add.html"> Create a New Table </a>
+    {% else %}
+        <h1> Tables </h1>
+        {% for table in tables %}
+            <form action="/tasks" method="POST"> <input type="submit" name= "table_name" value= '{{ table["name"] }}'> </form> <form action="/remove/index" method="POST"> <button type="submit" name="table" value= '{{ table["name"] }}' > Delete </button> </form><br>
+        {% endfor %}
+    {% endif %}
+    <h3> Add a New Table</h3>
+    <form action="/" method="POST">
+        <input type="text" placeholder="New Table Name" name="new_table">
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
